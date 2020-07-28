@@ -2,3 +2,5 @@ notion
 schedule
 python-dotenv
 Flask
+sentry-sdk
+blinker

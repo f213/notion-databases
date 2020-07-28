@@ -6,8 +6,10 @@ from multiprocessing import Process
 from os import path
 
 import schedule
+import sentry_sdk
 from dotenv import load_dotenv
 from flask import Flask, abort, jsonify
+from sentry_sdk.integrations.flask import FlaskIntegration
 
 from collection import iterate_notion_collection
 
@@ -18,6 +20,13 @@ COLLECTIONS = {
 }
 
 STORAGE_DIR = os.getenv('STORAGE_DIR') or '.'
+
+SENTRY_DSN = os.getenv('SENTRY_DSN')
+if SENTRY_DSN is not None:
+    sentry_sdk.init(
+        dsn=SENTRY_DSN,
+        integrations=[FlaskIntegration()],
+    )
 
 
 def fetch(collection, url):
