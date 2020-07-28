@@ -7,6 +7,7 @@ load_dotenv(verbose=True)
 
 notion = NotionClient(token_v2=os.getenv('NOTION_TOKEN'))
 
+
 def _get_row_dict(row) -> dict:
     return {prop: getattr(row, prop) for prop in row._get_property_slugs()}
 
